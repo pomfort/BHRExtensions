@@ -30,6 +30,7 @@
         [object setValue:@(i++) forKey:@"sortIndex"];
     }
 
+#warning saving here is bad when it's not the main context!
     NSError *error = nil;
     if (![[self managedObjectContext] save:&error])
     {
@@ -50,6 +51,8 @@
         }
     }
 
+
+#warning saving here is bad when it's not the main context!
     // Save the context.
     NSError *error = nil;
     if (![context save:&error])
