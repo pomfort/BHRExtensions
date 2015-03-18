@@ -156,6 +156,14 @@ NSString *EmptyStringIfNil(id object)
     return object;
 }
 
+NSString *NilIfEmptyString(NSString *string)
+{
+    if ([string length] == 0) {
+        return nil;
+    }
+    return string;
+}
+
 id NSNullIfNil(id object)
 {
 	if (object == nil)

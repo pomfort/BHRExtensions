@@ -23,6 +23,7 @@ NSString *NSStringFromBOOL(BOOL boolean);
 NSString *EmptyStringIfNil(id object);
 id NSNullIfNil(id object);
 NSString *NSStringEmptyIfNil(id object);
+NSString *NilIfEmptyString(NSString *string);
 
 //MATH
 
