@@ -26,6 +26,8 @@
 - (UIImage *)grayscaleImage;
 + (UIImage*)solidColorImageWithColor:(UIColor*)color;
 
+- (UIImage *)imageWithFixedRotation;
+
 #pragma mark - AppIcon
 
 /**
