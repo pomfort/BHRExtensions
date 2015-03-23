@@ -30,10 +30,12 @@
 
 #pragma mark - AppIcon
 
++ (UIImage *)appIcon;
+
 /**
  * Both work for iOS version >= 7
  */
-+ (UIImage *)iPhoneAppIcon;
-+ (UIImage *)iPadAppIcon;
++ (UIImage *)iPhoneAppIcon __deprecated;
++ (UIImage *)iPadAppIcon __deprecated;
 
 @end

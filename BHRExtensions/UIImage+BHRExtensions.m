@@ -8,6 +8,7 @@
 
 #import "UIImage+BHRExtensions.h"
 #import "NSObject+BHRExtensions.h"
+#import "UIDevice+BHRExtensions.h"
 
 @implementation UIImage (BHRExtensions)
 
@@ -291,6 +292,48 @@
 }
 
 #pragma mark -
+
++ (UIImage *)appIcon
+{
+    NSDictionary *infoPlist = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
+    NSString *keyPath;
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    NSString *resolutionSuffix = [self _imageResolutionSuffixForScale:scale];
+
+    if ([[UIDevice currentDevice] isiPad])
+    {
+        keyPath = @"CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconFiles";
+    }
+    else
+    {
+        keyPath = @"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles";
+    }
+
+    NSString *baseName = [[infoPlist valueForKeyPath:keyPath] lastObject];
+
+    UIImage *image = nil;
+
+    while (!image || (!image && scale > 1.f))
+    {
+        NSString *iconName = [NSString stringWithFormat:@"%@%@",baseName, resolutionSuffix];
+        image = [UIImage imageNamed:iconName];
+        scale -= 1.f;
+    }
+
+    return image;
+}
+
++ (NSString *)_imageResolutionSuffixForScale:(CGFloat)scale
+{
+    if (scale == 2.f) {
+        return @"@2x";
+    }
+    else if (scale == 3.f) {
+        return @"@3x";
+    }
+
+    return @"";
+}
 
 + (UIImage *)iPhoneAppIcon;
 {
