@@ -298,7 +298,6 @@
     NSDictionary *infoPlist = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
     NSString *keyPath;
     CGFloat scale = [[UIScreen mainScreen] scale];
-    NSString *resolutionSuffix = [self _imageResolutionSuffixForScale:scale];
 
     if ([[UIDevice currentDevice] isiPad])
     {
@@ -313,8 +312,9 @@
 
     UIImage *image = nil;
 
-    while (!image || (!image && scale > 1.f))
+    while (scale > 0 && !image)
     {
+        NSString *resolutionSuffix = [self _imageResolutionSuffixForScale:scale];
         NSString *iconName = [NSString stringWithFormat:@"%@%@",baseName, resolutionSuffix];
         image = [UIImage imageNamed:iconName];
         scale -= 1.f;
