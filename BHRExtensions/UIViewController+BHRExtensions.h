@@ -24,4 +24,7 @@ typedef NS_ENUM(NSUInteger, BHRChildViewRelation) {
 - (void)addConstraintBasedChildViewController:(UIViewController *)childViewController
 							childViewRelation:(BHRChildViewRelation)childViewRelation;
 
+- (void)addConstraintBasedSubview:(UIView *)subview
+                         relation:(BHRChildViewRelation)childViewRelation;
+
 @end
